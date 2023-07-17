@@ -1,14 +1,21 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@4.1.1
-  
+  win: circleci/windows@5.0.0 
+
 jobs:
   build:
     executor: win/server-2022
-    
+  hello-job:
+    executor:
+      name: win/default # executor type
+      size: "medium"
+
     steps:
       - checkout
-      - run:
-          name: echo
-          command: echo "Hello, world"
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
